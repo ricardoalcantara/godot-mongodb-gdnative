@@ -1,4 +1,5 @@
-#!python
+#!/usr/bin/env python
+
 import os, subprocess
 
 opts = Variables([], ARGUMENTS)
@@ -81,24 +82,50 @@ env.Append(CPPPATH=['.', godot_headers_path, cpp_bindings_path + 'include/', cpp
 env.Append(LIBPATH=[cpp_bindings_path + 'bin/'])
 env.Append(LIBS=[cpp_library])
 
-## Custom MongoDB
-# Macros
-# env.Append(CPPDEFINES=['MONGOCXX_STATIC', 'BSONCXX_STATIC', 'MONGOC_STATIC', 'BSON_STATIC'])
-# Includes Path
-env.Append(CPPPATH=[
-    '/usr/local/include/mongocxx/v_noabi', 
-    '/usr/local/include/bsoncxx/v_noabi'
-])
-# Lib Path
-env.Append(LIBPATH=['/usr/local/lib'])
 
-# Libs
-env.Append(LIBS=[
-    'mongocxx',
-    'bsoncxx'
-])
+## MongoDB
 
-## Custom MongoDB
+env.ParseConfig("pkg-config --cflags --libs libmongocxx-static")
+
+# # gcc -D defines a macro to be used by the preprocessor.
+# env.Append(CPPDEFINES=[
+# 	'MONGOCXX_STATIC',
+# 	'BSONCXX_STATIC',
+# 	'MONGOC_STATIC',
+# 	'BSON_STATIC'
+# ])
+
+# # gcc -I adds include directory of header files.
+# env.Append(CPPPATH=[
+# 	'/usr/local/include/mongocxx/v_noabi',
+# 	'/usr/local/include/bsoncxx/v_noabi',
+# 	'/usr/local/include/libmongoc-1.0',
+# 	'/usr/local/include/libbson-1.0'
+# ])
+
+# # gcc -L looks in directory for library files.
+# env.Append(LIBPATH=[
+# 	'/usr/local/lib'
+# ])
+
+# # gcc -l links with a library file.
+# env.Append(LIBS=[
+# 	'mongocxx-static',
+# 	'bsoncxx-static',
+# 	'mongoc-static-1.0',
+# 	'sasl2',
+# 	'ssl',
+# 	'crypto',
+# 	'rt',
+# 	'resolv',
+# 	'z',
+# 	'bson-static-1.0',
+# 	'c',
+# 	File('/usr/lib/x86_64-linux-gnu/librt.so'),
+# 	File('/usr/lib/x86_64-linux-gnu/libm.so')
+# ])
+
+## MongoDB
 
 # tweak this if you want to use different folders, or more folders, to store your source code in.
 env.Append(CPPPATH=['src/'])
