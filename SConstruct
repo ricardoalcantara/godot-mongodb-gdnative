@@ -81,6 +81,25 @@ env.Append(CPPPATH=['.', godot_headers_path, cpp_bindings_path + 'include/', cpp
 env.Append(LIBPATH=[cpp_bindings_path + 'bin/'])
 env.Append(LIBS=[cpp_library])
 
+## Custom MongoDB
+# Macros
+# env.Append(CPPDEFINES=['MONGOCXX_STATIC', 'BSONCXX_STATIC', 'MONGOC_STATIC', 'BSON_STATIC'])
+# Includes Path
+env.Append(CPPPATH=[
+    '/usr/local/include/mongocxx/v_noabi', 
+    '/usr/local/include/bsoncxx/v_noabi'
+])
+# Lib Path
+env.Append(LIBPATH=['/usr/local/lib'])
+
+# Libs
+env.Append(LIBS=[
+    'mongocxx',
+    'bsoncxx'
+])
+
+## Custom MongoDB
+
 # tweak this if you want to use different folders, or more folders, to store your source code in.
 env.Append(CPPPATH=['src/'])
 sources = Glob('src/*.cpp')

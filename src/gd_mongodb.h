@@ -20,7 +20,7 @@ public:
 
     void _init(); // our initializer called by Godot
 
-    String hello_world();
+    PoolStringArray hello_world();
 };
 
 }
