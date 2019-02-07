@@ -21,6 +21,7 @@ public:
     void _init(); // our initializer called by Godot
 
     PoolStringArray hello_world();
+    Dictionary get_dict();
 };
 
 }

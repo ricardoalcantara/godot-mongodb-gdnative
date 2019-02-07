@@ -12,6 +12,7 @@ using namespace godot;
 
 void GDMongoDB::_register_methods() {
 	register_method("hello_world", &GDMongoDB::hello_world);
+	register_method("get_dict", &GDMongoDB::get_dict);
 }
 
 GDMongoDB::GDMongoDB() {
@@ -43,4 +44,14 @@ PoolStringArray GDMongoDB::hello_world() {
     }
 
     return jsons;
+}
+
+Dictionary GDMongoDB::get_dict()
+{
+    Dictionary dict = Dictionary();
+    dict["Name"] = Variant("Ricardo");
+    dict["Age"] = Variant(31);
+    dict["size"] = Variant(1.76f);
+
+    return dict;
 }

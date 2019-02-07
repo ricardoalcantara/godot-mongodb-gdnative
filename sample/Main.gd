@@ -8,7 +8,13 @@ extends Node
 func _ready():
 #	instantiating a GDNative class
 	var test = load("res://bin/gdmongodb.gdns").new()
-	print(test.hello_world())
+#	print(test.hello_world())
+	
+	var dict: Dictionary = test.get_dict()
+	
+	for key in dict:
+		print(key, " - ", dict[key])
+	
 #	print($Node.hello_world())
 	pass
 
