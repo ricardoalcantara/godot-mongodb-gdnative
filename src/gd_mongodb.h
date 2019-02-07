@@ -3,6 +3,8 @@
 
 #include <Godot.hpp>
 #include <Reference.hpp>
+#include <mongocxx/instance.hpp>
+#include "gd_mongodb_connection.h"
 
 namespace godot {
 
@@ -10,18 +12,14 @@ class GDMongoDB : public Reference {
     GODOT_CLASS(GDMongoDB, Reference)
 
 private:
-    float time_passed;
+    static mongocxx::instance* mongocxx_instance;
 
 public:
     static void _register_methods();
-
-    GDMongoDB();
-    ~GDMongoDB();
-
     void _init(); // our initializer called by Godot
+    GDMongoDB();
 
-    PoolStringArray hello_world();
-    Dictionary get_dict();
+    GDMongoDBConnection GetConnection(String uri);
 };
 
 }
