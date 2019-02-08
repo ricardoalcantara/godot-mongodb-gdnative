@@ -8,18 +8,19 @@
 
 namespace godot {
 
-class GDMongoDBDatabase {
+class GDMongoDBDatabase : public Reference {
     GODOT_CLASS(GDMongoDBDatabase, Reference)
 
 private:
 	mongocxx::database _database;
 public:
     static void _register_methods();
-    GDMongoDBDatabase(mongocxx::database database);
     void _init(); // our initializer called by Godot
+    GDMongoDBDatabase();
 
+	void Initialize(mongocxx::database database);
 
-    GDMongoDBCollection GetCollection(String collection_name);
+    Ref<GDMongoDBCollection> GetCollection(String collection_name);
 };
 
 }

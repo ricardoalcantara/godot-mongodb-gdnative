@@ -19,7 +19,9 @@ public:
     void _init(); // our initializer called by Godot
     GDMongoDB();
 
-    GDMongoDBConnection GetConnection(String uri);
+	void Initialize();
+
+    Ref<GDMongoDBConnection> GetConnection(String uri);
 };
 
 }

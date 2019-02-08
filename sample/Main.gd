@@ -5,18 +5,15 @@ extends Node
 # var b = "text"
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _init():
 #	instantiating a GDNative class
-	var test = load("res://bin/gdmongodb.gdns").new()
-#	print(test.hello_world())
+	var mongodb = load("res://bin/gdmongodb.gdns").new()
+	var conn = mongodb.get_connection("mongodb://127.0.0.1:27017")
+	var db = conn.get_database("testdb")
+	var coll = db.get_collection("testcollection")
+	var doc = coll.find_one({})
 	
-	var dict: Dictionary = test.get_dict()
-	
-	for key in dict:
-		print(key, " - ", dict[key])
-	
-#	print($Node.hello_world())
-	pass
+	print(doc)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

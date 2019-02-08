@@ -84,8 +84,12 @@ env.Append(LIBS=[cpp_library])
 
 
 ## MongoDB
-
+# Using Static
 env.ParseConfig("pkg-config --cflags --libs libmongocxx-static")
+
+# Using Shared
+# env.ParseConfig("pkg-config --cflags --libs libmongocxx")
+# env.Append(RPATH='/usr/local/lib')
 
 # # gcc -D defines a macro to be used by the preprocessor.
 # env.Append(CPPDEFINES=[

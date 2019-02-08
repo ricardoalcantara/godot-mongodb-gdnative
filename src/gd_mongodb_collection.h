@@ -8,17 +8,19 @@
 namespace godot {
 
 class GDMongoDBCollection : public Reference {
+	GODOT_CLASS(GDMongoDBCollection, Reference)
+
     private:
 	mongocxx::collection _collection;
 
     public:
     static void _register_methods();
-    GDMongoDBCollection(mongocxx::collection collection);
     void _init(); // our initializer called by Godot
+    GDMongoDBCollection();
 
+	void Initialize(mongocxx::collection collection);
 	void InsertOne(Dictionary doc);
 	Dictionary FindOne(Dictionary doc);
-
 };
 
 }

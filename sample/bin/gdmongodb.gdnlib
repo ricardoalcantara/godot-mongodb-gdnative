@@ -1,5 +1,6 @@
 [entry]
 
+Server.64="res://bin/x11/libgdmongodb.so"
 X11.64="res://bin/x11/libgdmongodb.so"
 Windows.64="res://bin/win64/libgdmongodb.dll"
 OSX.64="res://bin/osx/libgdmongodb.dylib"

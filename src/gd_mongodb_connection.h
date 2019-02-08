@@ -17,10 +17,12 @@ private:
 public:
     static void _register_methods();
     void _init(); // our initializer called by Godot
-    GDMongoDBConnection(String uri);
+    GDMongoDBConnection();
     ~GDMongoDBConnection();
 
-    GDMongoDBDatabase GetDatabase(String database_name);
+	void Connect(String uri);
+
+    Ref<GDMongoDBDatabase> GetDatabase(String database_name);
 };
 
 }

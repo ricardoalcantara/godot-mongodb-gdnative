@@ -7,14 +7,18 @@ void GDMongoDBDatabase::_register_methods() {
 }
 
 void GDMongoDBDatabase::_init() {}
+GDMongoDBDatabase::GDMongoDBDatabase() {}
 
-GDMongoDBDatabase::GDMongoDBDatabase(mongocxx::database database)
+void GDMongoDBDatabase::Initialize(mongocxx::database database)
 {
 	_database = database;
 }
 
-GDMongoDBCollection GDMongoDBDatabase::GetCollection(String collection_name)
+Ref<GDMongoDBCollection> GDMongoDBDatabase::GetCollection(String collection_name)
 {
 	mongocxx::collection collection = _database.collection(collection_name.alloc_c_string());
-    return GDMongoDBCollection(collection);
+	Ref<GDMongoDBCollection> ref = Ref<GDMongoDBCollection>::__internal_constructor(GDMongoDBCollection::_new()); //hack to prevent leak
+	//Ref<GDMongoDBCollection> ret = Ref<GDMongoDBCollection>(GDMongoDBCollection::_new()); <-- should work but leaks
+	ref->Initialize(collection);
+    return ref;
 }

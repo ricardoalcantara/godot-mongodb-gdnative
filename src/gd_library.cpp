@@ -1,5 +1,8 @@
 #include <Godot.hpp>
 #include "gd_mongodb.h"
+#include "gd_mongodb_connection.h"
+#include "gd_mongodb_database.h"
+#include "gd_mongodb_collection.h"
 
 extern "C" void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *o) {
 	godot::Godot::gdnative_init(o);
@@ -13,4 +16,7 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void *handle) {
 	godot::Godot::nativescript_init(handle);
 
 	godot::register_class<godot::GDMongoDB>();
+	godot::register_class<godot::GDMongoDBConnection>();
+	godot::register_class<godot::GDMongoDBDatabase>();
+	godot::register_class<godot::GDMongoDBCollection>();
 }
