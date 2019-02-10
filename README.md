@@ -1,5 +1,11 @@
 # Godot GDNative MongoDB Driver
 
+This is not even close to usable.
+
+This is an interface to access MongoDB using mongo-cxx official lib.
+
+It's already connect but not more than that.
+
 ## godot-cpp compilie
 
 ### Linux
