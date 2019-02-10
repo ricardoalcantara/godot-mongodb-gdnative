@@ -4,6 +4,7 @@
 #include <Godot.hpp>
 #include <Reference.hpp>
 #include <mongocxx/collection.hpp>
+#include <bsoncxx/builder/stream/document.hpp>
 
 namespace godot {
 

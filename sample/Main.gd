@@ -11,7 +11,9 @@ func _init():
 	var conn = mongodb.get_connection("mongodb://127.0.0.1:27017")
 	var db = conn.get_database("testdb")
 	var coll = db.get_collection("testcollection")
-	var doc = coll.find_one({})
+	var n_doc = { "Name": "Ricardo", "Age": 31 }
+	coll.insert_one(n_doc)
+	var doc = coll.find_one({"Age": 31})
 	
 	print(doc)
 
