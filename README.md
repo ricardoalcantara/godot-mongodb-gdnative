@@ -10,6 +10,29 @@ scons -j8 platform=linux generate_bindings=yes bits=64
 
 ## MongoDB
 
+### Windows
+
+#### mongodb-c
+
+```bash
+cmake -G "Visual Studio 15 2017 Win64" "-DCMAKE_INSTALL_PREFIX=D:\mongo_driver\mongo_c_driver" "-DENABLE_SSL=WINDOWS" "-DCMAKE_PREFIX_PATH=D:\mongo_driver\mongo_c_driver" "-DENABLE_STATIC=ON" "-DENABLE_EXTRA_ALIGNMENT=OFF" ..
+
+msbuild.exe /p:Configuration=RelWithDebInfo ALL_BUILD.vcxproj
+
+msbuild.exe INSTALL.vcxproj
+```
+
+#### mongodb-cxx
+
+```bash
+cmake -G "Visual Studio 15 2017 Win64" "-DCMAKE_INSTALL_PREFIX=D:\mongo_driver\mongo_cxx_driver" "-DBSONCXX_POLY_USE_BOOST=1" "-DCMAKE_PREFIX_PATH=D:\mongo_driver\mongo_c_driver" "-DBUILD_SHARED_LIBS=OFF" "-DBOOST_ROOT=D:\mongo_driver\boost_1_69_0" ..
+
+msbuild.exe ALL_BUILD.vcxproj
+
+msbuild.exe INSTALL.vcxproj
+
+```
+
 ### Linux
 
 #### mongodb-c

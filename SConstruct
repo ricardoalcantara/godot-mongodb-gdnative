@@ -57,6 +57,14 @@ elif env['platform'] in ('x11', 'linux'):
     else:
         env.Append(CCFLAGS = ['-fPIC', '-g','-O3', '-std=c++17'])
 
+    ## MongoDB
+    # Using Static
+    env.ParseConfig("pkg-config --cflags --libs libmongocxx-static")
+
+    # Using Shared
+    # env.ParseConfig("pkg-config --cflags --libs libmongocxx")
+    # env.Append(RPATH='/usr/local/lib')
+
 elif env['platform'] == "windows":
     env['target_path'] += 'win64/'
     cpp_library += '.windows'
@@ -70,6 +78,36 @@ elif env['platform'] == "windows":
     else:
         env.Append(CCFLAGS = ['-O2', '-EHsc', '-DNDEBUG', '-MD'])
 
+    # # gcc -D defines a macro to be used by the preprocessor.
+    env.Append(CPPDEFINES=[
+        'MONGOCXX_STATIC',
+        'BSONCXX_STATIC',
+        'MONGOC_STATIC',
+        'BSON_STATIC'
+    ])
+
+    # # gcc -I adds include directory of header files.
+    env.Append(CPPPATH=[
+        'D:\mongo_driver\boost_1_69_0',
+        'D:\mongo_driver\mongo_c_driver\include\libbson-1.0',
+        'D:\mongo_driver\mongo_c_driver\include\libmongoc-1.0',
+        'D:\mongo_driver\mongo_cxx_driver\include\mongocxx\v_noabi',
+        'D:\mongo_driver\mongo_cxx_driver\include\bsoncxx\v_noabi'
+    ])
+
+    # # gcc -L looks in directory for library files.
+    env.Append(LIBPATH=[
+        'D:\mongo_driver\mongo_c_driver\lib',
+        'D:\mongo_driver\mongo_cxx_driver\lib'
+    ])
+
+    env.Append(LIBS=[
+        'mongocxx-static.lib',
+        'bsoncxx-static.lib',
+        'mongoc-static-1.0.lib',
+        'bson-static-1.0.lib'
+    ])
+
 if env['target'] in ('debug', 'd'):
     cpp_library += '.debug'
 else:
@@ -82,54 +120,6 @@ env.Append(CPPPATH=['.', godot_headers_path, cpp_bindings_path + 'include/', cpp
 env.Append(LIBPATH=[cpp_bindings_path + 'bin/'])
 env.Append(LIBS=[cpp_library])
 
-
-## MongoDB
-# Using Static
-env.ParseConfig("pkg-config --cflags --libs libmongocxx-static")
-
-# Using Shared
-# env.ParseConfig("pkg-config --cflags --libs libmongocxx")
-# env.Append(RPATH='/usr/local/lib')
-
-# # gcc -D defines a macro to be used by the preprocessor.
-# env.Append(CPPDEFINES=[
-# 	'MONGOCXX_STATIC',
-# 	'BSONCXX_STATIC',
-# 	'MONGOC_STATIC',
-# 	'BSON_STATIC'
-# ])
-
-# # gcc -I adds include directory of header files.
-# env.Append(CPPPATH=[
-# 	'/usr/local/include/mongocxx/v_noabi',
-# 	'/usr/local/include/bsoncxx/v_noabi',
-# 	'/usr/local/include/libmongoc-1.0',
-# 	'/usr/local/include/libbson-1.0'
-# ])
-
-# # gcc -L looks in directory for library files.
-# env.Append(LIBPATH=[
-# 	'/usr/local/lib'
-# ])
-
-# # gcc -l links with a library file.
-# env.Append(LIBS=[
-# 	'mongocxx-static',
-# 	'bsoncxx-static',
-# 	'mongoc-static-1.0',
-# 	'sasl2',
-# 	'ssl',
-# 	'crypto',
-# 	'rt',
-# 	'resolv',
-# 	'z',
-# 	'bson-static-1.0',
-# 	'c',
-# 	File('/usr/lib/x86_64-linux-gnu/librt.so'),
-# 	File('/usr/lib/x86_64-linux-gnu/libm.so')
-# ])
-
-## MongoDB
 
 # tweak this if you want to use different folders, or more folders, to store your source code in.
 env.Append(CPPPATH=['src/'])
